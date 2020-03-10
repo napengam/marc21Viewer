@@ -30,7 +30,7 @@ into **../mrc** .
 
 You can also filter for  **TAGs** . If this field is empty all tags within a  
 record will be displayed. If you want to display only certain tags, enter these   
-tag values as three digits like 020,100,084,245 intoo the given field.
+tag values as three digits like 020,100,084,245 into the given field.
 
 You can also navigate to a specific record within the marc21 file.
 
