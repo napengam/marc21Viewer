@@ -26,9 +26,9 @@
         $p->hor_nav_item_o(['functions' => 'marc.makePrevPage', 'title' => 'Previous page', 'text' => "<i class='fas fa-play fa-rotate-180'></i>"]);
         $p->hor_nav_item_o(['functions' => 'marc.makeNextPage', 'title' => 'Next page', 'text' => "<i class='fas fa-play'></i>"]);
         $p->hor_nav_item_o(['functions' => 'marc.makeLastPage', 'title' => 'Last page', 'text' => "<i class='fas  fa-step-forward'></i>"]);
-        $p->hor_nav_item_o(['functions' => 'marc.settings', 'title' => 'Einstellungen', 'text' => "<i class='fas fa-user-cog'></i>"]);
-        $p->hor_nav_item_o(['functions' => 'marc.fontSizeDown', 'title' => 'Schrift kleiner', 'text' => "<span>a</span>"]);
-        $p->hor_nav_item_o(['functions' => 'marc.fontSizeUp', 'title' => 'Schrift größer', 'text' => "<span>A</span>"]);
+        $p->hor_nav_item_o(['functions' => 'marc.settings', 'title' => 'Settings', 'text' => "<i class='fas fa-user-cog'></i>"]);
+        $p->hor_nav_item_o(['functions' => 'marc.fontSizeDown', 'title' => 'Font increase', 'text' => "<span>a</span>"]);
+        $p->hor_nav_item_o(['functions' => 'marc.fontSizeUp', 'title' => 'Font lessen', 'text' => "<span>A</span>"]);
 
 
         $p->end_hor_nav();
