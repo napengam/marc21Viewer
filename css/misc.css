@@ -1,0 +1,90 @@
+.hoverLink:hover{
+    cursor:pointer;
+}
+.a{
+    text-decoration:none;
+    float: left;
+    font-family: georgia,verdana,arial,sans-serif;
+    font-size: 1em;
+    padding-left:8px;
+    padding-right:8px;
+    padding-top:6px;
+    padding-bottom:6px;
+    background-color:white;
+    color:#C41834;
+}
+
+.a:hover{
+    background-color:#C41834;
+    color:white;
+
+}
+.ah{
+    text-decoration:none;
+    font-family: verdana,arial,sans-serif;
+    font-size:0.7em;
+    background-color:white;
+    color:#58585A;
+}
+
+.ah:hover{
+    background-color:#C41834;
+    color:white;
+
+}
+.as{
+    text-decoration:none;
+    float: left;
+    font-family: georgia,verdana,arial,sans-serif;
+    font-size: 1.1em;
+    padding-left:8px;
+    padding-right:8px;
+    padding-top:6px;
+    padding-bottom:6px;
+    background-color:#C41834;
+    color:white;
+}
+
+.as:hover{
+    background-color:#C41834;
+    color:white;
+
+}
+.a2{
+    text-decoration:none;
+    float: left;
+    font-family: verdana,arial,sans-serif;
+    font-size: 0.9em;
+    padding-left:8px;
+    padding-right:8px;
+    /*    padding-top:6px;
+        padding-bottom:6px;*/
+    background-color:white;
+    color:#C41834;
+}
+
+.a2:hover{
+    cursor:pointer;
+
+}
+#titelTab tr{
+    border-bottom:1px solid black;
+    vertical-align:top;
+   
+}
+#titelTab td{
+    border:1px solid black;
+    vertical-align:top;
+    padding-left:1em;
+    padding-right:1em;
+}
+.sort tr{
+    border-bottom:1px solid black;
+    vertical-align:top;
+}
+.sort td{
+    border:1px solid black;
+    vertical-align:top;
+    padding-left:1em;
+    padding-right:1em;
+}
