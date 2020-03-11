@@ -38,7 +38,8 @@
         $p->pageOut();
         ?>
 
-        <!-- js code zum Betrieb der SWPA -->
+        <!-- js code for infrastructure -->
+        
         <script src="../js/stickyHead.js" ></script>
         <script src="../js/myDialogs.js" ></script>      
         <script src="../js/mapFunctions.js" ></script>
@@ -47,7 +48,7 @@
         <script src="../js/makeDraggable.js" ></script>
 
 
-        <!-- js code zur Businesslogik für Viewer -->
+        <!-- js code fro teh business logic of viewer -->
 
         <script src="../js_marc/marcF.js" ></script>
 

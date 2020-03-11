@@ -10,6 +10,7 @@ Thats it !
 
 Im using fontawesome here via <link ...> 
 
+
 ## Using
 
 Point your web browser at marc21Viewer like **http://..your host here../marc21Viewer/viewer/**  
@@ -45,3 +46,4 @@ With arrows on top of the page you can go to the prevoius/next page or jump to t
 From here you can also open the settings dialog and scale the font up or down.
 
 ![first records](page.JPG)
+

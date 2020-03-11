@@ -6,59 +6,52 @@ function myDialogs() {
             keyDown = window.onkyedown,
             d = new Date(),
             t = d.getTime(),
+            divScroll = [
+                '<hr style="clear:both">',
+                '<div class="gagaText" style="text-align:center;overflow-y:auto;max-width: 600px;max-height: 400px;overflow-x: auto;white-space: pre;"> you should never see this </div>',
+                '<hr>'
+            ].join(''),
             allDialogsHTML = {
-                emptyDialog: ['<div>',
-                    '<span class=gagaText>you should never see this</span><p>',
-                    '<div  class=gagaAction style="text-align:center">',
-                    '</div>',
+                emptyDialog: [divScroll
+                ].join(''),
+                generalDialog: [
+                    divScroll, '<p>',
+                    '<div  class=gagaText style="text-align:center">',
                     '</div>'].join(''),
-                generalDialog: ['<div style="text-align:center">',
-                    '<span class=gagaText>you should never see this</span><p>',
-                    '<div  class=gagaAction style="text-align:center">',
-                    '</div>',
-                    '</div>'].join(''),
-                confirmDialog: ['<div  id="hgsmodc_veil" ><div class=moveHandle>&nbsp;</div>',
-                    '<hr style="clear:both">',
-                    '<span class=gagaText>you should never see this</span><hr>',
+                confirmDialog: [
+                    divScroll,
                     '<div style="text-align:center">',
                     '<button class="gagaButtonYes" tabindex=1 >Yes</button>&nbsp;',
                     '<button class="gagaButtonNo" tabindex=2 >No</button>',
-                    '</div>',
                     '</div>'].join(''),
-                alertDialog: ['<div  id="hgsmoda_veil"><div  class=moveHandle>&nbsp;</div>',
-                    '<hr style="clear:both">',
-                    '<span class=gagaText> you should never see this </span><hr>',
-                    '<div style="text-align:center" >',
-                    '<button  class=gagaButton tabindex=1 >OK</button>',
-                    '</div>',
-                    ''].join(''),
-                promptDialog: ['<div  id="hgsmodp_veil" style="text-align:center"><div  class=moveHandle >&nbsp;</div>',
-                    '<hr style="clear:both">',
-                    '<span class=gagaText> you should never see this </span><hr>',
+                alertDialog: [
+                    divScroll,
                     '<div style="text-align:center">',
-                    '<input class="gagaInput" type=text size=40 maxlength=40></div>',
+                    '<button  class=gagaButton tabindex=1 >OK</button>',
+                    '</div>'].join(''),
+                promptDialog: [
+                    divScroll,
+                    '<div style="text-align:center">',
+                    '<input class="gagaInput" type=text size=40 maxlength=40>',
+                    '</div>',
                     '<div id=hgsmodp_ddd  style="text-align:center"><button class="gagaButton" tabindex=1 >OK</button>',
                     '</div>'].join(''),
-                selectDialog: ['<div  id="hgsmods_veil"><div class=moveHandle>&nbsp;</div>',
-                    '<hr style="clear:both">',
-                    '<span class=gagaText> you should never see this </span><hr>',
+                selectDialog: [
+                    divScroll,
                     '<div style="text-align:center">',
-                    '<select class="gagaSelect"  size=1></select></div><hr>',
-                    '<div style="text-align:center"><br><button class="gagaButton" tabindex=1 >OK</button>',
+                    '<select class="gagaSelect"  size=1></select>',
+                    '</div><hr>',
+                    '<div style="text-align:center"><br>',
+                    '<button class="gagaButton" tabindex=1 >OK</button>',
                     '</div>'].join(''),
-                informDialog: ['<div  id="hgsmodi_veil"><div  class=moveHandle>&nbsp;</div>',
-                    '<hr style="clear:both">',
-                    '<span class=gagaText> you should never see this </span><hr>',
-                    '<div style="text-align:center" >',
+                informDialog: [
+                    divScroll,
+                    '<div style="text-align:center">',
                     '<button  class="gagaButton" tabindex=1 >OK</button>',
-                    '</div>',
-                    ''].join(''),
-                progressDialog: ['<div  id="hgsmodpo_veil"><div  class=moveHandle>&nbsp;</div>',
-                    '<hr style="clear:both">',
-                    '<span class=gagaText> you should never see this </span><hr>',
-                    '<div style="text-align:center" >', '</div>',
-                    ''].join(''),
-                loginDialog: ['<div  id="hgsmodl_veil"><div  class=moveHandle>&nbsp;</div>',
+                    '</div>'].join(''),
+                progressDialog: [
+                    divScroll].join(''),
+                loginDialog: [
                     '<hr>',
                     '<span class=gagaText style="text-align:center"> you should never see this </span><hr><br>',
                     '<div style="text-align:left"><p>',
@@ -66,15 +59,17 @@ function myDialogs() {
                     '<b>User:</b> <input class="gagaUser" tabindex=1  name=user style="float:right;margin-right:0px;" id=user type=text><p>',
                     '<b>Password:</b> <input tabindex=1  class="gagaPasswd" name=passwd style="float:right;margin-right:0px;" id=pass type=password>',
                     '<p class=gagaPasswd2hide style="display:none"><b>Repeat Password:</b> <input class="gagaPasswd2" id=passwd2id tabindex=1  name=passwd2 style="float:right;margin-right:0px;" type=password>',
-                    '<hr><p style="text-align:center;" ><input type=submit value=Anmelden class="gagaSubmit" tabindex=1 ></form>',
-                    '</div>',
-                    ''].join('')
+                    '<hr><p style="text-align:center;" ><input type=submit value=Anmelden class="gagaSubmit" tabindex=1 ></form>'
+                ].join('')
             },
             dialogs,
             dialogArray = [];
     ;
 
     if (document.querySelector(".divClassDialog4711") !== null) {
+        //********************************************
+        //  we allready exist
+        //*******************************************
         return document.getElementById('alertDialog').self;
     }
     //
@@ -85,10 +80,6 @@ function myDialogs() {
 
     function gebi(id) {
         return document.getElementById(id);
-    }
-
-    function vailOnClick() {
-        veil.onclick = dialogsClean;
     }
     function createDialogBox(id, HTML) {
         var aDiv;
@@ -101,11 +92,11 @@ function myDialogs() {
         aDiv.style.display = 'none';
         aDiv.className = 'divClassDialog4711';
         aDiv.style.position = 'fixed';
-        aDiv.style.transition = ' all 0.5s ease-out';
+        aDiv.style.transition = ' all 0.2s ease-out';
         aDiv.innerHTML = [
             "<div class='dialogDrag4711' title='drag me'>",
             "<span class='dialogMini4711' style='display:none;'  title='minimiere Dialog'>_</span>&nbsp;",
-            "<span class='dialogClose4711' title='Close Dialog' data-dialog='", id, "' >X</span></div>",
+            "<span class='dialogClose4711' title='Close Dialog' >X</span></div>",
             HTML].join('');
         document.body.appendChild(aDiv);
         makeDraggable({dragObj: aDiv, dragHandle: aDiv.querySelector('.dialogDrag4711')});
@@ -133,13 +124,6 @@ function myDialogs() {
     // most general dialogbox
     //**********************************************
 
-    function myEmptyDialog(text) {
-        var obj = dialogArray['emptyDialog'],
-                elem = obj.querySelector('.gagaText');
-        elem.innerHTML = text;
-        positionDialog(obj);
-        return obj;
-    }
     function myDialogBox(cfg) {
         var obj = dialogArray['generalDialog'],
                 html = [], elem = obj.querySelector('.gagaText');
@@ -157,7 +141,13 @@ function myDialogs() {
         });
         return obj;
     }
-
+    function myEmptyDialog(text) {
+        var obj = dialogArray['emptyDialog'],
+                elem = obj.querySelector('.gagaText');
+        elem.innerHTML = text;
+        positionDialog(obj);
+        return obj;
+    }
     //***
     //Information dialog
     //**/
@@ -170,7 +160,6 @@ function myDialogs() {
             obj.style.display = 'none';
         };
         obj.querySelector('.gagaButton').focus();
-        return obj;
     }
     //
     // The action within the login box is just an OK button
@@ -193,7 +182,7 @@ function myDialogs() {
         };
         obj.querySelector('.gagaSubmit').focus();
         window.onkeydown = handleKeyDown;
-        return obj;
+        return;
     }
     //
     // The action within the alert box is just an OK button
@@ -213,7 +202,7 @@ function myDialogs() {
         };
         obj.querySelector('.gagaButton').focus();
         window.onkeydown = handleKeyDown;
-        return obj;
+        return;
     }
     //
     //
@@ -223,7 +212,7 @@ function myDialogs() {
         var obj = dialogArray['progressDialog'];
         obj.querySelector('.gagaText').innerHTML = '<b>' + a_text.replace(/\n/gi, "<br>") + '</b>';
         positionDialog(obj);
-        return obj;
+        return;
     }
     //
     // The action within the confirm box 
@@ -249,9 +238,9 @@ function myDialogs() {
             callNo();
         };
         obj.querySelector('.gagaButtonNo').focus();
-        vailOnClick('modal_confirm_no');
+
         window.onkeydown = handleKeyDown;
-        return obj;
+        return;
     }
     //
     // The action within the prompt by enter box 
@@ -272,9 +261,9 @@ function myDialogs() {
             callOnEnter(obj.querySelector('.gagaInput').value);
         };
         obj.querySelector('.gagaButton').focus();
-        vailOnClick('hgsmodp_ccc');
+
         window.onkeydown = handleKeyDown;
-        return obj;
+        return;
     }
     // 
     //  The action within the prompt by select box 
@@ -296,14 +285,12 @@ function myDialogs() {
         n = o0.length;
         for (i = 0; i < n; i++) {
             o1 = o0[i].split('|');
-            if (o1.length === 0) {
-                v = o = d = '';
-            } else if (o1.length === 1) {
+            v = o = d = '';
+            if (o1.length === 1) {
                 v = o = d = o1[0];
             } else if (o1.length === 2) {
                 v = o1[0];
-                o = o1[1];
-                d = o1[1];
+                o = d = o1[1];
             } else if (o1.length === 3) {
                 v = o1[0];
                 o = o1[1];
@@ -323,15 +310,11 @@ function myDialogs() {
             callOnSelect(sel.options[sel.selectedIndex]);
         };
         obj.querySelector('.gagaButton').focus();
-        vailOnClick('hgsmods_ccc');
-        return obj;
+
+        return;
     }
     function handleKeyDown(e) {
         var keyCode = e.keyCode || e.which;
-        if ([9, 13, 32, 27].indexOf(keyCode) === -1) {
-            // Don't do work on keys we don't care about.
-            return;
-        }
         if (keyCode === 9) {
             if (e.target.id === 'user') {
                 gebi('pass').focus();
@@ -351,8 +334,8 @@ function myDialogs() {
     function makeStyle() {
         var styleElem = document.createElement('STYLE');
         styleElem.innerHTML = [
-            ".divClassDialog4711{width:auto;background:white; border: 1px solid silver;padding:8px; }",
-            ".dialogDrag4711{ background-color:#ececec;text-align:right;display:inline-block;width:100%;border-bottom:0px solid black }",
+            ".divClassDialog4711{background:white; border: 1px solid silver;padding:8px; }",
+            ".dialogDrag4711{ background-color:#ececec;text-align:right;display:inline-block;width:100%;border-bottom:1px solid black }",
             ".dialogDrag4711:hover{ cursor:move;background-color:lightgray;}",
             ".dialogClose4711{ font-weight:bold;font-size:1.2em; background-color:white;color:red;padding-left:4px;padding-right:4px;}",
             ".dialogClose4711:hover{cursor:default;color:white;background-color:red;}",
@@ -367,7 +350,6 @@ function myDialogs() {
     // Here we  reveal the dialogs/functions to the caller
     //
     reveal = {
-        myEmptyDialog: myEmptyDialog, //(text)
         myDialogBox: myDialogBox, //(text)
         myInform: myInform, //(text)
         myLogin: myLogin, //(text,actionScript,reset)
@@ -376,7 +358,9 @@ function myDialogs() {
         myPrompt: myPrompt, //(text,default Value,callOnEnter)
         myProgress: myProgress, //(text)
         myPromptSelect: myPromptSelect, //(text,option-list,callOnSelect),
-        closeDialog: dialogsClean
+        dialogsClean: dialogsClean,
+        closeDialog: dialogsClean,
+        myEmptyDialog: myEmptyDialog,
     };
     //********************************************
     //  we create the dialogs here 
