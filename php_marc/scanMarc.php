@@ -19,8 +19,10 @@ if ($m21->error !== '') {
 
 $m21->setPosition(0);
 $offsets = [];
+$ntotal = 0;
 while ($m21->skipRecord()) {
     $offsets[] = $m21->recordOffset;
+    $ntotal++;
 }
 $param->error = $m21->error;
 $param->result = $offsets;

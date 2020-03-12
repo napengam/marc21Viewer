@@ -25,7 +25,7 @@ function marcF() {
             saveSettings();
         }
         return;
-    } 
+    }
     function saveSettings() {
         //********************************************
         //  save 
@@ -62,6 +62,7 @@ function marcF() {
             return;
         }
         allOffsets = resPkg.result;
+        ntotal = resPkg.ntotal;
         makePage();
     }
 
@@ -94,8 +95,9 @@ function marcF() {
             n++;
             pager.current++;
         }
+        payload.ntotal = ntotal;
 
-        dialogs.myInform('Get a page; Just a second <br><i class="fas fa-spinner fa-spin"></i>');
+        dialogs.myInform('Get a page; Just a second');
         backend.fetchHTML('contentTarget', '../php_marc/makeMarcPage.php', payload, () => {
             dialogs.closeDialog();
             sth = stickyHead('t1', {ncpth: [1, 4], nccol: 4, topDif: 'headdivHGS', leftDif: 0});

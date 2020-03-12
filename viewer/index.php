@@ -39,7 +39,7 @@
         ?>
 
         <!-- js code for infrastructure -->
-        
+
         <script src="../js/stickyHead.js" ></script>
         <script src="../js/myDialogs.js" ></script>      
         <script src="../js/mapFunctions.js" ></script>
@@ -64,6 +64,7 @@
                 //  get application specific functions
                 //
                 allOffsets = []; //of records within marc21 file
+                ntotal = 0;
                 pager = {current: 0, last: 0};
 
                 marc = marcF();
