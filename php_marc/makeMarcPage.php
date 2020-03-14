@@ -31,9 +31,6 @@ if ($m21->error) {
     exit;
 }
 $m21->setTagFilter($filter);
-
-
-
 $nrec = $nmatch = 0;
 
 $echo = [];

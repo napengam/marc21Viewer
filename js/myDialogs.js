@@ -155,7 +155,7 @@ function myDialogs() {
         var obj = dialogArray['informDialog'];
         obj.querySelector('.gagaText').innerHTML = '<b>' + text.replace(/\n/gi, "<br>") + '</b>';
         positionDialog(obj);
-        veil.veilOff();
+        // veil.veilOff();
         obj.querySelector('.gagaButton').onclick = function () {
             obj.style.display = 'none';
         };
