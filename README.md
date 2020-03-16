@@ -14,7 +14,7 @@ Im using fontawesome here via <link ...>
 
 The example marc21 files are received from the GERMAN NATIONAL LIBRARY therefore  
 the link generated for the value, control number, of TAG '001' will lead you to  
-website of the GERMAN NATIONAL LIBRARY. 
+the relate entry within the website of the GERMAN NATIONAL LIBRARY. 
 
 If you want to change this, look in source *makeMarcPage.php* for function *checkForUri*. 
 
