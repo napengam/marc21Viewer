@@ -115,14 +115,17 @@ class m21File {
                 $oneTag->seq = $seq;
                 $seq++;
                 if ($tag >= '010') {
+                    $ind0 = '_';
+                    $ind1 = '_';
                     $oneTag->ind = '__';
                     if ($this->data[$offset] > ' ') {
-                        $oneTag->ind{0} = $this->data[$offset];
+                        $ind0 = $this->data[$offset];
                     }
                     $offset++;
                     if ($this->data[$offset] > ' ') {
-                        $oneTag->ind{1} = $this->data[$offset];
+                        $ind1 = $this->data[$offset];
                     }
+                    $oneTag->ind = $ind0 . $ind1;
                     if ($oneTag->ind === '__') {
                         $oneTag->ind = '';
                     }
