@@ -49,6 +49,7 @@ function stickyHead(tableId, headConfig) {
         document.body.removeChild(theHead);
     }
     rotate90(myTable); // rotate header cell if any ..
+
     headConfig = getHeadConfig(headConfig);
 
     //***************************************
@@ -125,7 +126,7 @@ function stickyHead(tableId, headConfig) {
         //  copy HTML for top left corner  , with this create sticky
         //  table with header
         //*****************************************
-        var temp = [], i, j, c0, cst, ohtml, inner, maxHeight = 0;
+        var temp = [], i, j, c0, cst, inner, maxHeight = 0;
         if (hasLeftColumns === false) {
             return;
         }
@@ -156,7 +157,7 @@ function stickyHead(tableId, headConfig) {
         // *************************************/
         for (i = 0; i < headConfig.ncpth.length; i++) {
             c0 = myTable.rows[i].cells;
-            maxHeight = getMaxHeight(c0); // look for highest cell in this row
+            maxHeight = getMaxHeightStyle(c0); // look for highest cell in this row
             for (j = 0; j < headConfig.ncpth[i]; j++) {
                 cst = topLeftCorner.firstChild.rows[i].cells[j].style;
                 cst.width = window.getComputedStyle(c0[j]).width;
@@ -217,7 +218,7 @@ function stickyHead(tableId, headConfig) {
         // the original data row.
         // *************************************/
         n = theLeftColumn.firstChild.rows.length;
-        for (i = 1; i < n; i++) {
+        for (i = 0; i < n; i++) {
             cells = theLeftColumn.firstChild.rows[i].cells;
             ri = headConfig.ncpth.length + i;
             hi = getMaxHeight(dataRows[ri].cells);
@@ -296,6 +297,20 @@ function stickyHead(tableId, headConfig) {
         }
         return max;
     }
+    function getMaxHeightStyle(c0) {
+        var max = -1, th = -1, i, n;
+        n = c0.length;
+        for (i = 0; i < n; i++) {
+            th = parseFloat(c0[i].style.height);// try this first
+            if (isNaN(th)) {
+                th = parseFloat(window.getComputedStyle(c0[i]).height);
+            }
+            if (th > max) {
+                max = th;
+            }
+        }
+        return max;
+    }
     //******************************************
     //  callback if page is scrolled
     //*****************************************
@@ -327,7 +342,7 @@ function stickyHead(tableId, headConfig) {
     //  scroll in a div
     //*******************************************
 
-    function scrollDiv(e) { //////// scrolling in DIV
+    function scrollDiv(e) { /// scrolling in DIV
         var y, x;
         if (typeof e !== 'undefined') {
             y = e.target.scrollTop;
@@ -391,7 +406,7 @@ function stickyHead(tableId, headConfig) {
         if (t.position === 'absolute') {
             t.position = 'fixed';
             t.left = headConfig.leftDif + 'px';
-            t.top = (flo.ylc - y) + headConfig.topDif + 'px';
+            t.top = (flo.ylc - y)-1 + headConfig.topDif + 'px';
         }
         tt.display === 'none' && y < flo.bottom ? tt.display = '' : '';
         if (tt.position === 'absolute') { // the corner
@@ -443,9 +458,9 @@ function stickyHead(tableId, headConfig) {
             }
         }
     };
-    // ////////////////////////////////////////////////////
+    // //////////////
     // functions called when scrolling within a DIV
-    // ////////////////////////////////////////////////////
+    // //////////////
 
     theHead.vsyncR = function (x, y) {
         var t = this.style;
@@ -512,7 +527,7 @@ function stickyHead(tableId, headConfig) {
         nr = myTable.rows.length;
         nc = myTable.rows[nr - 1].cells.length;
         p = absPos(myTable, tableParent);
-        flo.ylc = absPos(myTable.rows[headConfig.ncpth.length], tableParent).y;
+        flo.ylc = absPos(myTable, tableParent).y + headHeight;
         pp = absPos(tableParent);
         flo.y = p.y;
         flo.x = p.x;
@@ -626,6 +641,7 @@ function stickyHead(tableId, headConfig) {
             });
         }
     }
+    scrollBody();
     return{
         scrollBody: scrollBody
     };

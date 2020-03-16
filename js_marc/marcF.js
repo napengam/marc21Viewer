@@ -98,6 +98,7 @@ function marcF() {
         payload.ntotal = ntotal;
 
         dialogs.myInform('Get a page; Just a second');
+        document.getElementById('contentTarget').innerHTML = '';
         backend.fetchHTML('contentTarget', '../php_marc/makeMarcPage.php', payload, () => {
             dialogs.closeDialog();
             sth = stickyHead('t1', {ncpth: [1, 4], nccol: 4, topDif: 'headdivHGS', leftDif: 0});
