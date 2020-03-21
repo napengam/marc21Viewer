@@ -98,7 +98,7 @@ class m21File {
                 }
 
                 $len = mb_substr($this->dict, $i + 3, 4) + 0;
-                $offset = mb_substr($this->dict, $i + 3 + 4, 5) + 0;
+                $offset = mb_substr($this->dict, $i + 7, 5) + 0;
 
                 if ($tag != $refTag) {
                     $seq = 1;
@@ -117,7 +117,6 @@ class m21File {
                 if ($tag >= '010') {
                     $ind0 = '_';
                     $ind1 = '_';
-                    $oneTag->ind = '__';
                     if ($this->data[$offset] > ' ') {
                         $ind0 = $this->data[$offset];
                     }
@@ -139,6 +138,7 @@ class m21File {
                 $s = 0;
                 $len = $offset + $len;
                 while ($offset < $len && $this->data[$offset] !== "\x1E") {
+                    $oneTag->subs[$s] = (object) '';
                     if ($this->data[$offset] === "\x1F") {
                         /*
                          * ***********************************************
@@ -146,7 +146,6 @@ class m21File {
                          * ***********************************************
                          */
                         $offset++;
-                        $oneTag->subs[$s] = (object) '';
                         $oneTag->subs[$s]->code = $this->data[$offset];
                         $offset++;
                     } else {
@@ -155,7 +154,6 @@ class m21File {
                          *  no subfield code 
                          * ***********************************************
                          */
-                        $oneTag->subs[$s] = (object) '';
                         $oneTag->subs[$s]->code = '';
                     }
                     /*
@@ -166,28 +164,30 @@ class m21File {
                     $myData = [];
                     $o = $offset;
                     while ($this->data[$o] >= ' ') {
-                        if ((ord($this->data[$o]) === 194 && ord($this->data[$o + 1]) === 152 ) ||
-                                (ord($this->data[$o]) === 194 && ord($this->data[$o + 1]) === 156 )) {
-                            /*
-                             * ************
-                             * skip over  
-                             * NON-SORT BEGIN / START OF STRING UTF 8 as (HEX) 0xC2  0x98 (dec) 194 152
-                             * NON-SORT END / STRING TERMINATOR UTF 8 as (HEX) 0xC2  0x9C (dec) 194 156
-                             * 
-                             * *************
-                             */
-                            $o += 2;
-                        } else {
-                            $myData[] = $this->data[$o];
-                            $o++;
+                        if (ord($this->data[$o]) === 194) {
+                            $do1 = ord($this->data[$o + 1]);
+                            if ($do1 === 152 || $do1 === 156) {
+                                /*
+                                 * ************
+                                 * skip over  
+                                 * NON-SORT BEGIN / START OF STRING UTF 8 as (HEX) 0xC2  0x98 (dec) 194 152
+                                 * NON-SORT END / STRING TERMINATOR UTF 8 as (HEX) 0xC2  0x9C (dec) 194 156
+                                 * 
+                                 * *************
+                                 */
+                                $o += 2;
+                                continue;
+                            }
                         }
+                        $myData[] = $this->data[$o];
+                        $o++;
                     }
                     /*
                      * ************
                      * save data
                      * *************
                      */
-                    $oneTag->subs[$s]->data = Normalizer::normalize(trim(implode($myData)), Normalizer::FORM_C);
+                    $oneTag->subs[$s]->data = Normalizer::normalize(implode($myData), Normalizer::FORM_C);
                     $offset = $o;
                     $s++;
                 }

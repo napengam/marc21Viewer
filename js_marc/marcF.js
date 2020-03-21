@@ -2,7 +2,7 @@
 
 function marcF() {
     'use strict';
-    var lastFile, reveal = {};
+    var lastFile = '', lastFilter = '', reveal = {};
 
     function init() {
         pager.file = '../mrc/Atest.mrc';// just to test as default
@@ -42,8 +42,9 @@ function marcF() {
             }
         });
         if (error === 0 && pager.file !== '') {
-            if (lastFile !== pager.file) {
+            if (lastFile !== pager.file || lastFilter !== pager.filter) {
                 lastFile = pager.file;
+                lastFilter = pager.filter
                 pager.current = 0;
                 dialogs.closeDialog();
                 dialogs.myInform('Scaning; Just a second <br><i class="fas fa-spinner fa-spin"></i>');
@@ -63,6 +64,7 @@ function marcF() {
         }
         allOffsets = resPkg.result;
         ntotal = resPkg.ntotal;
+        time = resPkg.time;
         makePage();
     }
 
@@ -96,6 +98,7 @@ function marcF() {
             pager.current++;
         }
         payload.ntotal = ntotal;
+        payload.time = time;
 
         dialogs.myInform('Get a page; Just a second');
         document.getElementById('contentTarget').innerHTML = '';

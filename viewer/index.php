@@ -53,6 +53,7 @@
         <script src="../js_marc/marcF.js" ></script>
 
         <script>
+            'use strict:'
             window.addEventListener('load', start, false);
             function start() {
                 //
@@ -65,6 +66,7 @@
                 //
                 allOffsets = []; //of records within marc21 file
                 ntotal = 0;
+                time = 0;
                 pager = {current: 0, last: 0};
 
                 marc = marcF();

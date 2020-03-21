@@ -15,7 +15,7 @@ if ($m21->error !== '') {
     echo json_encode($param, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_NUMERIC_CHECK);
     exit;
 }
-
+$timeStart = microtime(true);
 
 $m21->setPosition(0);
 $offsets = [];
@@ -24,8 +24,12 @@ while ($m21->skipRecord()) {
     $offsets[] = $m21->recordOffset;
     $ntotal++;
 }
+$timeEnd = microtime(true);
+
+
 $param->error = $m21->error;
 $param->result = $offsets;
 $param->ntotal = $ntotal;
+$param->time = floor($timeEnd - $timeStart) + 1;
 
 echo json_encode($param, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_NUMERIC_CHECK);

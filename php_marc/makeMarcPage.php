@@ -43,7 +43,7 @@ if ($filter) {
     $fi = ", filtered by tags $filter ";
 }
 
-$h2 = '<h2 id=h2id style="">File=' . basename($file) . " with $param->ntotal records $fi <br>" . $git;
+$h2 = '<h2 id=h2id style="">File=' . basename($file) . " with $param->ntotal records in $param->time seconds; $fi <br>" . $git;
 $echo[] = '<table style="margin-left:10px;width:auto" id=t1 class=tgrid>'
         . "<tr><th class=tgrid_th colspan=4>Parameters</th><th class=tgrid_th colspan=1>$h2</th></tr>"
         . '<tr><th class=tgrid_th>Tag</th><th class=tgrid_th>Seq</th><th data-rotate class=tgrid_th>Indicator</th>'
