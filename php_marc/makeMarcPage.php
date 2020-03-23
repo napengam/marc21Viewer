@@ -2,6 +2,7 @@
 <?php
 
 require '../marc21/marc21.php';
+include 'ddc.php';
 
 $json = file_get_contents('php://input');
 $param = (object) json_decode($json, true);
@@ -72,8 +73,14 @@ foreach ($param->get as $offset) {
         foreach ($oneTag->subs as $sub) {
             if ($sub->code != '' || $oneTag->tag === '001') {
                 $sub->data = checkForUri($sub->data, $oneTag->tag);
+            } else {
+                $sub->data = htmlentities($sub->data, ENT_COMPAT);
             }
-            $echo[] = "$head<td align=center>" . $sub->code . '</td><td> ' . wordwrap($sub->data, 120) . '</td></tr>';
+            $ddcText = '';
+            if ($param->ddcflag && $oneTag->tag == '082' && $sub->code == 'a') {
+                $ddcText = $DDC[(int) $sub->data];
+            }
+            $echo[] = "$head<td align=center>" . $sub->code . '</td><td> ' . wordwrap($sub->data, 120) . '<span style=float:right;color:gray>' . wordwrap($ddcText, 80) . '</span></td></tr>';
             $head = '<tr><td></td><td></td><td></td>';
         }
     }
