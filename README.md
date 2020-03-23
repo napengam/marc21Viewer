@@ -8,7 +8,7 @@ Thats it !
 
 ### Dependencies
 
-Im using fontawesome here via <link ...> 
+Im using fontawesome here via <link> 
 
 ## Note
 

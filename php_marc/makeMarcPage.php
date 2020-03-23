@@ -40,7 +40,7 @@ $git = '';
 
 $fi = '';
 if ($filter) {
-    $fi = ", filtered by tags $filter ";
+    $fi = "<br> filtered by tags $filter ";
 }
 
 $h2 = '<h2 id=h2id style="">File=' . basename($file) . " with $param->ntotal records in $param->time seconds; $fi <br>" . $git;

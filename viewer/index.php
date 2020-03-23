@@ -22,6 +22,7 @@
         $p->start_head_nav('');
         $p->end_head_nav();
         $p->start_hor_nav();
+        $p->hor_nav_item_o(['text' => "<span style='background-color:#8a8a8a;color:white;font-size:2em'> Marc21 Viewer </span>"]);
         $p->hor_nav_item_o(['functions' => 'marc.makeFirstPage', 'title' => 'First page', 'text' => "<i class='fas  fa-step-backward'></i>"]);
         $p->hor_nav_item_o(['functions' => 'marc.makePrevPage', 'title' => 'Previous page', 'text' => "<i class='fas fa-play fa-rotate-180'></i>"]);
         $p->hor_nav_item_o(['functions' => 'marc.makeNextPage', 'title' => 'Next page', 'text' => "<i class='fas fa-play'></i>"]);

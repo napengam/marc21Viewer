@@ -102,7 +102,9 @@ function stickyHead(tableId, headConfig) {
         tableParent.appendChild(theHead);
         theHead.firstChild.style.marginLeft = 0;
         theHead.firstChild.style.marginTop = 0;
-        theHead.firstChild.style.width = '100%';
+        //theHead.firstChild.style.width = '100%';
+        theHead.firstChild.style.width = myTable.clientWidth + 'px';
+
         theHead.firstChild.id = '';
         headHeight = theHead.firstChild.clientHeight; // save because it is rendered now
         theHead.style.display = 'none';
@@ -119,6 +121,7 @@ function stickyHead(tableId, headConfig) {
             });
         }
         theHead.style.width = window.getComputedStyle(myTable).width;
+
     }
     function makeTopLeftCorner() {
         //
@@ -382,7 +385,7 @@ function stickyHead(tableId, headConfig) {
             t.display !== 'none' ? t.display = 'none' : '';
             return;
         }
-        t.display === 'none' ? t.display = 'inline-grid' : '';
+        t.display === 'none' ? t.display = '' : '';
         if (t.position !== 'fixed') {
             t.position = 'fixed';
             t.left = flo.x - x + headConfig.leftDif + 'px';
@@ -406,7 +409,7 @@ function stickyHead(tableId, headConfig) {
         if (t.position === 'absolute') {
             t.position = 'fixed';
             t.left = headConfig.leftDif + 'px';
-            t.top = (flo.ylc - y)-1 + headConfig.topDif + 'px';
+            t.top = (flo.ylc - y) - 1 + headConfig.topDif + 'px';
         }
         tt.display === 'none' && y < flo.bottom ? tt.display = '' : '';
         if (tt.position === 'absolute') { // the corner

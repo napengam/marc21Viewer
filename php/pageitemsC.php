@@ -267,7 +267,8 @@ class aPage {
 
 function headOne() {
 
+
     return '
     <div style="text-align:center;background-color:white;">
-    <h1>MARC21 Viewer</h1> ';
+    <!--h2>MARC21 Viewer</h2 --> ';
 }

@@ -32,7 +32,7 @@ function marcF() {
         //*******************************************
         var error = 0, vlist, obj = document.getElementById('mvsettings');
         dialogs.closeDialog();
-        vlist = obj.querySelectorAll('INPUT');
+        vlist = obj.querySelectorAll('INPUT, SELECT');
         vlist.forEach((elem) => {
             elem.style.color = '';
             pager[elem.name] = elem.value.trim();
