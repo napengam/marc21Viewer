@@ -7,6 +7,7 @@ function marcF() {
     function init() {
         pager.file = '../mrc/Atest.mrc';// just to test as default
         pager.rpv = 25;
+        pager.ddcflag = true;
         settings();
     }
 
@@ -35,11 +36,16 @@ function marcF() {
         vlist = obj.querySelectorAll('INPUT, SELECT');
         vlist.forEach((elem) => {
             elem.style.color = '';
-            pager[elem.name] = elem.value.trim();
+            if (elem.type === 'checkbox') {
+                pager[elem.name] = elem.checked;
+            } else {
+                pager[elem.name] = elem.value.trim();
+            }
             if (elem.dataset.type === 'n' && isNaN(elem.value)) {
                 error++;
                 elem.style.color = 'red';
             }
+
         });
         if (error === 0 && pager.file !== '') {
             if (lastFile !== pager.file || lastFilter !== pager.filter) {
