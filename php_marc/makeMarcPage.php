@@ -62,7 +62,7 @@ foreach ($param->get as $offset) {
         break;
     }
     if (count($tags) == 0) {
-        continue;
+        continue; 
     }
     $echo[] = '<tr style="background:whitesmoke;"><td></td><td></td><td></td><td></td><td style="text-align:right;">' . ($nrec) . '</td></tr>';
     $ddcEntry = count($echo) - 1;
