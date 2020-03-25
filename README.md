@@ -1,5 +1,10 @@
 # Web application to browse through marc21 files
 
+## Demo
+
+a demo of the viewer is located on my webspace http://hgsweb.de/marc21Viewer  
+
+
 ## Installation
 
 In your web root create a directory named **marc21Viewer**, for instance.    
