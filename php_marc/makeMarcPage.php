@@ -35,9 +35,7 @@ $m21->setTagFilter($filter);
 $nrec = $nmatch = 0;
 
 $echo = [];
-$git = 'All sources at '
-        . '<a href="https://github.com/napengam/marc21" style="margin-left:1em;vertical-align:center">GitHub<img src="GitHub.png"></a><br>';
-$git = '';
+
 
 $fi = '';
 if ($filter) {
@@ -66,24 +64,42 @@ foreach ($param->get as $offset) {
     if (count($tags) == 0) {
         continue;
     }
-    $echo[] = '<tr style="background:whitesmoke;"><td>&nbsp;</td><td></td><td></td><td></td><td style="text-align:right;" >' . ($nrec) . '</td></tr>';
+    $echo[] = '<tr style="background:whitesmoke;"><td></td><td></td><td></td><td></td><td style="text-align:right;">' . ($nrec) . '</td></tr>';
+    $ddcEntry = count($echo) - 1;
+    $ddt = [];
     foreach ($tags as $oneTag) {
-        $echo [] = "<tr  $bgrow><td>" . $oneTag->tag . '</td><td>' . $oneTag->seq . '</td><td> ' . $oneTag->ind . '</td>';
+        $echo [] = "<tr  $bgrow><td>" . $oneTag->tag . '</td><td style="text-align:right">' . $oneTag->seq . '</td><td> ' . $oneTag->ind . '</td>';
         $head = '';
         foreach ($oneTag->subs as $sub) {
+
+            $href = '';
+            if ($oneTag->tag === '020' && $sub->code === '9' && $oneTag->seq == 1) {
+                $href = hrefAmazon($sub->data);
+            }
             if ($sub->code != '' || $oneTag->tag === '001') {
                 $sub->data = checkForUri($sub->data, $oneTag->tag);
             } else {
                 $sub->data = htmlentities($sub->data, ENT_COMPAT);
             }
+
             $ddcText = '';
             if ($param->ddcflag && $oneTag->tag == '082' && $sub->code == 'a') {
                 $ddcText = $DDC[(int) $sub->data];
+                $ddt[] = $ddcText;
             }
-            $echo[] = "$head<td align=center>" . $sub->code . '</td><td> ' . wordwrap($sub->data, 120) . '<span style=float:right;color:gray>' . wordwrap($ddcText, 80) . '</span></td></tr>';
+            $isbn = '';
+            if ($href) {
+                $isbn = "<a href='$href' target=amaz><i class='fab fa-amazon'></i></a>";
+            }
+
+
+            $echo[] = "$head<td align=center>" . $sub->code . '</td><td> ' . wordwrap($sub->data, 120) . '<span style=float:right;color:gray>' . wordwrap($ddcText, 80) . $isbn . '</span></td></tr>';
             $head = '<tr><td></td><td></td><td></td>';
         }
     }
+//    if ($param->ddcflag) { 
+//        $echo[$ddcEntry] = '<tr style="background:whitesmoke;"><td colspan=5 style="text-align:right;"><div style=color:gray>' . wordwrap(implode('<br>', $ddt), 80) . ' </div> ' . ($nrec) . '</td></tr>';
+//    }
     $ndisplay++;
     $nrec++;
 }
@@ -112,4 +128,11 @@ function checkForUri($data, $tag) {
     }
 
     return $data;
+}
+
+function hrefAmazon($isbn) {
+    $href = '';
+    $isbn = implode('', explode('-', $isbn));
+    $href = "http://www.amazon.de/s/ref=nb_sb_noss?url=search-alias%3Dstripbooks&field-keywords=$isbn";
+    return $href;
 }
