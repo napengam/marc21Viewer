@@ -17,12 +17,14 @@
         <?php
         include_once "../php/pageitemsC.php";
 
+        $github = " <a title='sources at github' href='https://github.com/napengam/marc21Viewer' target='git'><i class='fab fa-github'></i></a> ";
+        
         $p = new aPage();
         $p->startPage();
         $p->start_head_nav('');
         $p->end_head_nav();
         $p->start_hor_nav();
-        $p->hor_nav_item_o(['text' => "<span style='background-color:#8a8a8a;color:white;font-size:2em'> Marc21 Viewer </span>"]);
+        $p->hor_nav_item_o(['text' => "<span style='background-color:#8a8a8a;color:white;font-size:2em'>Marc21 Viewer</span>"]);
         $p->hor_nav_item_o(['functions' => 'marc.makeFirstPage', 'title' => 'First page', 'text' => "<i class='fas  fa-step-backward'></i>"]);
         $p->hor_nav_item_o(['functions' => 'marc.makePrevPage', 'title' => 'Previous page', 'text' => "<i class='fas fa-play fa-rotate-180'></i>"]);
         $p->hor_nav_item_o(['functions' => 'marc.makeNextPage', 'title' => 'Next page', 'text' => "<i class='fas fa-play'></i>"]);
@@ -49,7 +51,7 @@
         <script src="../js/makeDraggable.js" ></script>
 
 
-        <!-- js code fro teh business logic of viewer -->
+        <!-- js code for the logic of viewer -->
 
         <script src="../js_marc/marcF.js" ></script>
 

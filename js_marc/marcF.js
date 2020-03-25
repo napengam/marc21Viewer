@@ -110,7 +110,7 @@ function marcF() {
         document.getElementById('contentTarget').innerHTML = '';
         backend.fetchHTML('contentTarget', '../php_marc/makeMarcPage.php', payload, () => {
             dialogs.closeDialog();
-            sth = stickyHead('t1', {ncpth: [1, 4], nccol: 4, topDif: 'headdivHGS', leftDif: 0});
+            sth = stickyHead('t1', {ncpth: [0, 0], nccol: 0, topDif: 'headdivHGS', leftDif: 0});
             sth.scrollBody();
         });
     }
