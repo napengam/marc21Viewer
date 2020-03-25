@@ -1,5 +1,15 @@
 # Web application to browse through marc21 files
 
+
+## MARC 21 ?
+
+MARC 21. MARC (MAchine-Readable Cataloging) standards are a set of digital formats  
+for the description of items catalogued by libraries, such as books. ...  
+By 1971, MARC formats  had become the US national standard for dissemination of  
+bibliographic data. Two years later, they became the international standard.27.02.2020
+
+See also https://www.loc.gov/marc/faq.html
+
 ## Demo
 
 a demo of the viewer is located on my webspace http://hgsweb.de/marc21Viewer  
