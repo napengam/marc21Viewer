@@ -39,7 +39,7 @@ Point your web browser at marc21Viewer like **http://..your host here../marc21Vi
 
 #### This will open the settings dialog.
 
-![settings](settings.JPG)
+![settings](img/settings.JPG)
 
 Here you can enter what files to browse.   
 The example marc21 fiels are located in **../mrc**
@@ -60,12 +60,12 @@ You can also navigate to a specific record within the marc21 file.
 Pressing 'save' the given file will be processed.  
 This is indicated by a small modal dialog.
 
-![scanning](scanning.JPG)
+![scanning](img/scanning.JPG)
 
 #### Finaly you will be presented with the first page of records.
 
 With the arrows on top of the page you can go to the prevoius/next page or jump to the start or end of the marc21 file.  
 From here you can also open the settings dialog and scale the font up or down.
 
-![first records](page.JPG)
+![first records](img/page.JPG)
 
