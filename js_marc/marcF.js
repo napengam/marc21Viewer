@@ -2,14 +2,24 @@
 
 function marcF() {
     'use strict';
-    var lastFile = '', lastFilter = '', reveal = {};
+    var
+            lastFile = '',
+            lastFilter = '',
+            reveal = {},
+            allOffsets = [], //of records within marc21 file
+            ntotal = 0,
+            time = 0,
+            pager;
 
-    function init() {
-        pager.file = '../mrc/Atest.mrc';// just to test as default
-        pager.rpv = 25;
-        pager.ddcflag = true;
-        settings();
-    }
+    //********************************************
+    //  first time init globals 
+    //*******************************************
+
+    pager = {current: 0, last: 0};
+    pager.file = '../mrc/Atest.mrc';// just to test as default
+    pager.rpv = 25;
+    pager.ddcflag = true;
+
 
     function settings() {
 
@@ -50,7 +60,7 @@ function marcF() {
         if (error === 0 && pager.file !== '') {
             if (lastFile !== pager.file || lastFilter !== pager.filter) {
                 lastFile = pager.file;
-                lastFilter = pager.filter
+                lastFilter = pager.filter;
                 pager.current = 0;
                 dialogs.closeDialog();
                 dialogs.myInform('Scaning; Just a second <br><i class="fas fa-spinner fa-spin"></i>');
@@ -153,7 +163,7 @@ function marcF() {
         pageItemAdjust();
     }
     reveal = {
-        init: init,
+
         settings: settings,
         saveSettings: saveSettings,
         makeNextPage: makeNextPage,

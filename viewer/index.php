@@ -18,7 +18,7 @@
         include_once "../php/pageitemsC.php";
 
         $github = " <a title='sources at github' href='https://github.com/napengam/marc21Viewer' target='git'><i class='fab fa-github'></i></a> ";
-        
+
         $p = new aPage();
         $p->startPage();
         $p->start_head_nav('');
@@ -32,6 +32,7 @@
         $p->hor_nav_item_o(['functions' => 'marc.settings', 'title' => 'Settings', 'text' => "<i class='fas fa-user-cog'></i>"]);
         $p->hor_nav_item_o(['functions' => 'marc.fontSizeDown', 'title' => 'Font increase', 'text' => "<span>a</span>"]);
         $p->hor_nav_item_o(['functions' => 'marc.fontSizeUp', 'title' => 'Font lessen', 'text' => "<span>A</span>"]);
+        $p->hor_nav_item_o(['text' => $github]);
 
 
         $p->end_hor_nav();
@@ -55,32 +56,32 @@
 
         <script src="../js_marc/marcF.js" ></script>
 
-        <script>
-            'use strict:'
-            window.addEventListener('load', start, false);
-            function start() {
-                //
-                //  setup infrastructure
-                // 
-                dialogs = myDialogs(); // access to dialogs      
-                backend = myBackend(); // access to backend
-                //
-                //  get application specific functions
-                //
-                allOffsets = []; //of records within marc21 file
-                ntotal = 0;
-                time = 0;
-                pager = {current: 0, last: 0};
 
-                marc = marcF();
+
+        <script>
+
+            //
+            //  setup infrastructure
+            // 
+            dialogs = myDialogs(); // access to dialogs      
+            backend = myBackend(); // access to backend
+            //
+            //  get application specific functions
+            //
+            marc = marcF();
+            // 
+            function start() {
+                'use strict';
+
                 // * ***********************************************
                 //  start GUI; instrument  navigation
                 // ************************************************
                 mapFunctions('horNavHGS', '.findMe_hor', Object.assign({}, marc));
-                marc.init();
+                marc.settings(); // call settings dialog at very first call
                 return;
             }
-
+            // kick of 
+            window.addEventListener('load', start, false);
         </script>
     </body>
 </html>
