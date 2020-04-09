@@ -101,6 +101,7 @@ function myDialogs() {
         document.body.appendChild(aDiv);
         makeDraggable({dragObj: aDiv, dragHandle: aDiv.querySelector('.dialogDrag4711')});
         aDiv.querySelector('.dialogClose4711').addEventListener('click', dialogsClean, false);
+        aDiv.dataset.firstCall = '1';
         return aDiv;
     }
 
@@ -156,10 +157,14 @@ function myDialogs() {
         obj.querySelector('.gagaText').innerHTML = '<b>' + text.replace(/\n/gi, "<br>") + '</b>';
         positionDialog(obj);
         // veil.veilOff();
-        obj.querySelector('.gagaButton').onclick = function () {
+        if (obj.dataset.firstCall === '1') {
+            obj.dataset.firstCall = '0';
+            obj.querySelector('.gagaButton').onclick = click;
+            obj.querySelector('.gagaButton').focus();
+        }
+        function click() {
             obj.style.display = 'none';
-        };
-        obj.querySelector('.gagaButton').focus();
+        }
     }
     //
     // The action within the login box is just an OK button
@@ -360,7 +365,7 @@ function myDialogs() {
         myPromptSelect: myPromptSelect, //(text,option-list,callOnSelect),
         dialogsClean: dialogsClean,
         closeDialog: dialogsClean,
-        myEmptyDialog: myEmptyDialog,
+        myEmptyDialog: myEmptyDialog
     };
     //********************************************
     //  we create the dialogs here 
