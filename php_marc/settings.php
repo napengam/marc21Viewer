@@ -11,7 +11,7 @@ $fNames = scandir($dir);
 
 $opt = [];
 foreach ($fNames as $name) {
-    if ($name == '.' || $name == '..') {
+    if ($name == '.' || $name == '..' || is_dir($name)) {
         continue;
     }
     $sel = '';
