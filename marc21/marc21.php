@@ -221,6 +221,7 @@ class m21File {
         if ($reclen - $dataoffset > 0) {
             fread($this->fh, $dataoffset - 24);
             fread($this->fh, $reclen - $dataoffset);
+            $this->nRecords++;
             return true;
         }
         $this->nRecords++;
