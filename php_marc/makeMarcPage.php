@@ -62,7 +62,7 @@ foreach ($param->get as $offset) {
         break;
     }
     if (count($tags) == 0) {
-        continue; 
+        continue;
     }
     $echo[] = '<tr style="background:whitesmoke;"><td></td><td></td><td></td><td></td><td style="text-align:right;">' . ($nrec) . '</td></tr>';
     $ddcEntry = count($echo) - 1;
@@ -97,9 +97,6 @@ foreach ($param->get as $offset) {
             $head = '<tr><td></td><td></td><td></td>';
         }
     }
-//    if ($param->ddcflag) { 
-//        $echo[$ddcEntry] = '<tr style="background:whitesmoke;"><td colspan=5 style="text-align:right;"><div style=color:gray>' . wordwrap(implode('<br>', $ddt), 80) . ' </div> ' . ($nrec) . '</td></tr>';
-//    }
     $ndisplay++;
     $nrec++;
 }
