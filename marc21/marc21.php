@@ -176,6 +176,7 @@ class m21File {
                                  * *************
                                  */
                                 $o += 2;
+                                $do1 === 152 ? $myData[] = '{' : $myData[] = '}';
                                 continue;
                             }
                         }
