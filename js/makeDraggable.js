@@ -72,7 +72,7 @@ function makeDraggable(options) {
     //drag object on screen.
     //***
     function dragStart(event) {
-        if (event.type !== 'dragstart') {
+        if (event.type !== 'dragstart' ||  dragObj.draggable===false) {
             return;
         }
         this.style.position = "fixed";
@@ -93,7 +93,7 @@ function makeDraggable(options) {
     //***
     function dragEnd(event) {
         var newPos;
-        if (event.type !== 'dragend') {
+        if (event.type !== 'dragend' ||  dragObj.draggable===false) {
             return;
         }
         if (this.dragOption.allowY) {
