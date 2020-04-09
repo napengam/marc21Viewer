@@ -113,15 +113,16 @@ exit;
 
 function checkForUri($data, $tag) {
 
+    $wdata=wordwrap($data, 120,'<br>',true);
     $target = ' target=link ';
     if (mb_substr($data, 0, 5) == '(uri)') {
-        $data = '<a  ' . $target . 'href="' . mb_substr($data, 5) . '">' . $data . '</a>';
+        $data = '<a  ' . $target . 'href="' . mb_substr($data, 5) . '">' . $wdata . '</a>';
     } else if (mb_substr($data, 0, 5) == 'http:') {
-        $data = '<a  ' . $target . 'href="' . $data . '">' . $data . '</a>';
+        $data = '<a  ' . $target . 'href="' . $data . '">' . $wdata . '</a>';
     } else if (mb_substr($data, 0, 6) == 'https:') {
-        $data = '<a  ' . $target . 'href="' . $data . '">' . $data . '</a>';
+        $data = '<a  ' . $target . 'href="' . $data . '">' . $wdata . '</a>';
     } else if ($tag === '001') {
-        $data = '<a  ' . $target . 'title="Link to DNB" href="http://d-nb.info/' . $data . '">' . $data . '</a>';
+        $data = '<a  ' . $target . 'title="Link to DNB" href="http://d-nb.info/' . $data . '">' . $wdata . '</a>';
     }
 
     return $data;
