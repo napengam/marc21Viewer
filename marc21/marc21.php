@@ -88,31 +88,29 @@ class m21File {
              * ***********************************************
              */
             $refTag = '';
-            for ($j = 0, $i = 0; $j < $nTags; $j++, $i += 12) {
-                $tag = mb_substr($this->dict, $i, 3);
-
+            for ($j = 0, $i = 0; $j < $nTags; $j++) {
+                $tag = substr($this->dict, $i, 3);
+                $i += 3;
                 if ($this->filter && $tag !== '001') {
                     if (strpos($this->filter, $tag) === false) {
                         continue; //tag not in filter; skip it
                     }
                 }
-
-                $len = mb_substr($this->dict, $i + 3, 4) + 0;
-                $offset = mb_substr($this->dict, $i + 7, 5) + 0;
+                $len = substr($this->dict, $i, 4) + 0;
+                $i += 4;
+                $offset = substr($this->dict, $i, 5) + 0;
+                $i += 5;
 
                 if ($tag != $refTag) {
                     $seq = 1;
                     $refTag = $tag;
                 }
-                $oneTag = (object) ''; //
-                $oneTag->tag = $tag;
+                $oneTag = (object) ['tag' => $tag, 'ind' => '  ', 'seq' => $seq]; //              
                 /*
                  * ***********************************************
                  * indicators ?
                  * ***********************************************
-                 */
-                $oneTag->ind = '  ';
-                $oneTag->seq = $seq;
+                 */      
                 $seq++;
                 if ($tag >= '010') {
                     $ind0 = '_';
@@ -138,7 +136,7 @@ class m21File {
                 $s = 0;
                 $len = $offset + $len;
                 while ($offset < $len && $this->data[$offset] !== "\x1E") {
-                    $oneTag->subs[$s] = (object) '';
+                    $oneTag->subs[$s] = (object) ['code' => '', 'data' => ''];
                     if ($this->data[$offset] === "\x1F") {
                         /*
                          * ***********************************************
@@ -175,8 +173,8 @@ class m21File {
                                  * 
                                  * *************
                                  */
-                                $o += 2;
                                 $do1 === 152 ? $myData[] = '{' : $myData[] = '}';
+                                $o += 2;                               
                                 continue;
                             }
                         }
