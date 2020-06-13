@@ -24,7 +24,8 @@ if ($param->file) {
     echo json_encode($param, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_NUMERIC_CHECK);
     exit;
 }
-$m21 = new m21File($file);
+$m21 = new m21File();
+$m21->openM21($file);
 if ($m21->error) {
     $param->error = $m21->error;
     $param->result = '';
@@ -113,7 +114,7 @@ exit;
 
 function checkForUri($data, $tag) {
 
-    $wdata=wordwrap($data, 120,'<br>',true);
+    $wdata = wordwrap($data, 120, '<br>', true);
     $target = ' target=link ';
     if (mb_substr($data, 0, 5) == '(uri)') {
         $data = '<a  ' . $target . 'href="' . mb_substr($data, 5) . '">' . $wdata . '</a>';
