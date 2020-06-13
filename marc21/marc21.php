@@ -31,11 +31,12 @@ class m21File {
     private $fh, $filter, $leader, $dict, $data = [], $nRecords, $dataLen;
     public $recordOffset, $pos67, $error = '';
 
-    function __construct($m21File) {
+    function openM21($m21File) {
         if (file_exists($m21File)) {
             $this->fh = fopen($m21File, 'rb');
             $this->filter = '';
             $this->nRecords = 0;
+            $this->data = [];
         } else {
             $this->error = "File " . basename($m21File) . " does not exist";
         }
@@ -91,16 +92,16 @@ class m21File {
             for ($j = 0, $i = 0; $j < $nTags; $j++) {
                 $tag = substr($this->dict, $i, 3);
                 $i += 3;
+
+                $len = substr($this->dict, $i, 4) + 0;
+                $i += 4;
+                $offset = substr($this->dict, $i, 5) + 0;
+                $i += 5;
                 if ($this->filter && $tag !== '001') {
                     if (strpos($this->filter, $tag) === false) {
                         continue; //tag not in filter; skip it
                     }
                 }
-                $len = substr($this->dict, $i, 4) + 0;
-                $i += 4;
-                $offset = substr($this->dict, $i, 5) + 0;
-                $i += 5;
-
                 if ($tag != $refTag) {
                     $seq = 1;
                     $refTag = $tag;
@@ -110,23 +111,12 @@ class m21File {
                  * ***********************************************
                  * indicators ?
                  * ***********************************************
-                 */      
+                 */
                 $seq++;
                 if ($tag >= '010') {
-                    $ind0 = '_';
-                    $ind1 = '_';
-                    if ($this->data[$offset] > ' ') {
-                        $ind0 = $this->data[$offset];
-                    }
-                    $offset++;
-                    if ($this->data[$offset] > ' ') {
-                        $ind1 = $this->data[$offset];
-                    }
+                    $ind0 = $this->data[$offset++];
+                    $ind1 = $this->data[$offset++];
                     $oneTag->ind = $ind0 . $ind1;
-                    if ($oneTag->ind === '__') {
-                        $oneTag->ind = '';
-                    }
-                    $offset++;
                 }
                 /*
                  * ***********************************************
@@ -174,7 +164,7 @@ class m21File {
                                  * *************
                                  */
                                 $do1 === 152 ? $myData[] = '{' : $myData[] = '}';
-                                $o += 2;                               
+                                $o += 2;
                                 continue;
                             }
                         }
@@ -205,11 +195,14 @@ class m21File {
     }
 
     function setPosition($offset) {
-        fseek($this->fh, $offset);
-        $this->recordOffset = $offset;
+        if ($this->fh) {
+            fseek($this->fh, $offset);
+            $this->recordOffset = $offset;
+        }
     }
 
     function skipRecord() {
+
         $this->recordOffset = ftell($this->fh);
         $this->leader = fread($this->fh, 24);
         if (feof($this->fh)) {
@@ -224,7 +217,7 @@ class m21File {
             return true;
         }
         $this->nRecords++;
-        $this->error .= "\r\nAb Record $this->nRecords, bei Offeset  $this->recordOffset,  kann nicht weiter gelesen werden";
+        $this->error .= "\r\nAb Record $this->nRecords, bei Offset  $this->recordOffset,  kann nicht weiter gelesen werden";
         return false;
     }
 
@@ -235,18 +228,18 @@ class m21File {
      */
 
     private final function readM21Record() {
-        $fh = $this->fh;
-        $this->recordOffset = ftell($fh);
-        $this->leader = fread($fh, 24);
-        if (feof($fh)) {
+
+        $this->recordOffset = ftell($this->fh);
+        $this->leader = fread($this->fh, 24);
+        if (feof($this->fh)) {
             return false;
         }
         $this->pos67 = mb_substr($this->leader, 6, 2);
         $reclen = mb_substr($this->leader, 0, 5) * 1;
         $dataoffset = mb_substr($this->leader, 12, 5) * 1;
         if ($reclen - $dataoffset > 0) {
-            $this->dict = fread($fh, $dataoffset - 24);
-            $this->data = str_split(fread($fh, $reclen - $dataoffset));
+            $this->dict = fread($this->fh, $dataoffset - 24);
+            $this->data = str_split(fread($this->fh, $reclen - $dataoffset));
             $this->dataLen = $reclen - $dataoffset;
             $this->nRecords++;
         } else {
