@@ -227,7 +227,7 @@ class m21File {
      * ***********************************************
      */
 
-    private final function readM21Record() {
+    private function readM21Record() {
 
         $this->recordOffset = ftell($this->fh);
         $this->leader = fread($this->fh, 24);
