@@ -12,7 +12,7 @@ See also https://www.loc.gov/marc/faq.html
 
 ## Demo
 
-a demo of the viewer is located on my webspace http://hgsweb.de/marc21Viewer  
+a demo of the viewer is located on my webspace http://www.hgsweb.de/marc21Viewer  
 
 
 ## Installation
